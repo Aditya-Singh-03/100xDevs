@@ -1,0 +1,39 @@
+function isAnagram(str1, str2) {
+  const cleanStr1 = str1.replace(/\s/g, '').toLowerCase();
+      const cleanStr2 = str2.replace(/\s/g, '').toLowerCase();
+
+     
+      if (cleanStr1.length !== cleanStr2.length) {
+          return false;
+      }
+
+
+      const frequencyMap1 = createFrequencyMap(cleanStr1);
+      const frequencyMap2 = createFrequencyMap(cleanStr2);
+
+      
+      return compareMaps(frequencyMap1, frequencyMap2);
+  }
+
+  function createFrequencyMap(str) {
+      const frequencyMap = new Map();
+      for (const char of str) {
+          frequencyMap.set(char, (frequencyMap.get(char) || 0) + 1);
+      }
+      return frequencyMap;
+  }
+
+  function compareMaps(map1, map2) {
+      if (map1.size !== map2.size) {
+          return false;
+      }
+
+      for (const [key, value] of map1) {
+          if (value !== map2.get(key)) {
+              return false;
+          }
+      }
+
+      return true;
+
+}
